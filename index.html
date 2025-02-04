@@ -4,24 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculates the average of credit history and allows you to plan for future credit endeavors.">
-    <meta name="keywords" content="credit age, finacial tool, credit history calculator, average age of credit">
+    <meta name="keywords" content="credit age, financial tool, credit history calculator, average age of credit">
     <title>Credit Age Calculator</title>
     <style>
-        body {font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 20px; }
+        body {font-family: Arial, Helvetica, sans-serif; text-align: left; padding: 20px; }
         input, button {margin: 5px; padding: 8px; }
         .result {margin-top: 20px; font-size: 1.2em; font-weight:bold;}
+        .container { display: flex; justify-content: left; align-items: left; flex-direction: column; }
+        .date-field { display: flex; align-items: center; gap: 10px; }
+        .date-field label { width: 120px; text-align: right; }
+        #date-fields { margin-bottom: 15px; }
     </style>
 </head>
 <body>
-    
-    <h2>Average Age of Credit Calculator</h2>
-    <form action="main.py" method="post">
-        <div id="date-fields">
-            <input type="date" name = "dates">
-        </div>
-        <button type="button" onclick="addField()">Add Date</button>
-        <button type="submit">Calculate</button>
-    </form>
+
+    <div class="container">
+        <h2>Average Age of Credit Calculator</h2>
+
+        <form action="main.py" method="post">
+            <p><strong>Instructions:</strong> Enter the month and year each account was opened.</p>
+            
+            <div id="date-fields">
+                <div class="date-field">
+                    <label>Account 1:</label>
+                    <input type="month" name="dates">
+                </div>
+                <div class="date-field">
+                    <label>Account 2:</label>
+                    <input type="month" name="dates">
+                </div>
+                <div class="date-field">
+                    <label>Account 3:</label>
+                    <input type="month" name="dates">
+                </div>
+                <div class="date-field">
+                    <label>Account 4:</label>
+                    <input type="month" name="dates">
+                </div>
+                <div class="date-field">
+                    <label>Account 5:</label>
+                    <input type="month" name="dates">
+                </div>
+            </div>
+
+            <button type="button" onclick="addFields()">Add 5 More Accounts</button>
+            <button type="submit">Calculate AAOA</button>
+        </form>
+    </div>
+
+    <script>
+        let accountCount = 5; 
+
+        function addFields() {
+            let container = document.getElementById("date-fields");
+
+            for (let i = 1; i <= 5; i++) {
+                accountCount++;
+                let div = document.createElement("div");
+                div.className = "date-field";
+                
+                let label = document.createElement("label");
+                label.textContent = `Account ${accountCount}:`;
+
+                let input = document.createElement("input");
+                input.type = "month";
+                input.name = "dates";
+
+                div.appendChild(label);
+                div.appendChild(input);
+                container.appendChild(div);
+            }
+        }
+    </script>
 
 </body>
 </html>
